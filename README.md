@@ -13,6 +13,8 @@ In summary, SparseViT leverages the distinction between semantic and non-semanti
 <details>
   <summary>1) Set up the coding environment</summary>
   <br></br>
+
+   - You should install the packages in
   - First, clone the repository:
 
   ```bash
