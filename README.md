@@ -3,7 +3,7 @@
 Official repository for the AAAI2025 paper  Can We Get Rid of Handcrafted Feature Extractors? SparseViT: Nonsemantics-Centered, Parameter-Efficient Image Manipulation Localization through Spare-Coding Transformer_ [[paper]](https://arxiv.org/abs/2412.14598) [[website]](https://github.com/scu-zjz/SparseViT).
 
 <p float="left">
-  <img src="sparsevit.png" alt="SparseViT Framework Diagram" width="98%">
+  <img src="images/sparsevit.png" alt="SparseViT Framework Diagram" width="98%">
 </p>
 
 In summary, SparseViT leverages the distinction between semantic and non-semantic features, enabling the model to adaptively extract non-semantic features that are more critical for image manipulation localization. This provides a novel approach to precisely identifying manipulated regions.
