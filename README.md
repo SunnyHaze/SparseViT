@@ -54,7 +54,7 @@ This should be super easy! Simply run
 python main_test.py
 ```
 
-Here, we have simply provided a basic test of SparseViT. Of course, you can train and test SparseViT within our proposed IMDL-Bench framework, as they are fully compatible.
+Here, we have simply provided a basic test of SparseViT. Of course, you can train and test SparseViT within our proposed [IMDL-Bench](https://github.com/scu-zjz/IMDLBenCo) framework, as they are fully compatible.
 
 ## Citation
 
