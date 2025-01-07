@@ -41,9 +41,9 @@ pip install -r requirements.txt
 </details>
 
 <details>
-  <summary>2)Download our pretrained checkpoints</summary>
-  <br></br>
-  Download our pretrained checkpoints from [Google_Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) [Google Drive](https://github.com/scu-zjz/SparseViT/blob/main/requirements.txt)  and place them in checkpoint directory.
+  <summary>2) Download our pretrained checkpoints</summary>
+  <br>
+  Download our pretrained checkpoints from [Google Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) and place them in the checkpoint directory.
 </details>
 
 ## Scripts
