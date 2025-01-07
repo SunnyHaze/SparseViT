@@ -12,7 +12,7 @@ In summary, SparseViT leverages the distinction between semantic and non-semanti
 
 <details>
   <summary>1) Set up the coding environment</summary>
-  <br></br>
+  <br>
 
    - First, clone the repository:
 
