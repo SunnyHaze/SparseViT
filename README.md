@@ -32,7 +32,7 @@ Python 3.10
 PyTorch 2.4
   ```
 
-  - You should install the packages in [requirements.txt](https://github.com/SunnyHaze/IML-ViT/blob/main/requirements.txt) 
+  - You should install the packages in [requirements.txt](https://github.com/scu-zjz/SparseViT/blob/main/requirements.txt) 
 
   ```bash
 pip install -r requirements.txt
@@ -43,7 +43,7 @@ pip install -r requirements.txt
 <details>
   <summary>2)Download our pretrained checkpoints</summary>
   <br></br>
-  Download our pretrained checkpoints from [Google Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) and place them in checkpoint directory.
+  Download our pretrained checkpoints from [Google Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) [Google Drive](https://github.com/scu-zjz/SparseViT/blob/main/requirements.txt)  and place them in checkpoint directory.
 </details>
 
 ## Scripts
