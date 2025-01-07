@@ -20,7 +20,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 print("Device:", device)
 
-ckpt_path = "./checkpoint/checkpoint-160.pth"
+ckpt_path = "./checkpoint/checkpoint.pth"
 model = SparseViT_Mul()
 
 model.load_state_dict(
