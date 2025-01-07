@@ -43,7 +43,9 @@ pip install -r requirements.txt
 <details>
   <summary>2) Download our pretrained checkpoints</summary>
   <br>
-  Download our pretrained checkpoints from [Google Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) and place them in the checkpoint directory.
+  
+  - Download our pretrained checkpoints from [Google Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) and place them in the checkpoint directory.
+    
 </details>
 
 ## Scripts
