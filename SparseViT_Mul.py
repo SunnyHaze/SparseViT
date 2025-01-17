@@ -45,7 +45,7 @@ class SparseViT_Mul(nn.Module):
             nn.init.constant_(m.weight, 1.0)
     
     def forward(self, image, *args, **kwargs):
-        image = self.encoder_net_dilation2(image)
+        image = self.encoder_net(image)
         feature_list = []
         for k, v in image.items():
             feature_list.append(v)
