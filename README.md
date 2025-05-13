@@ -72,3 +72,12 @@ If you find our code useful, please consider citing us and give us a star!
   primaryClass={cs.CV}
 }
 ```
+
+## Star History
+<a href="https://star-history.com/#scu-zjz/SparseViT&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=scu-zjz/SparseViT&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=scu-zjz/SparseViT&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=scu-zjz/SparseViT&type=Date" />
+ </picture>
+</a>
