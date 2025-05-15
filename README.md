@@ -63,12 +63,22 @@ Here, we have simply provided a basic test of SparseViT. Of course, you can trai
 If you find our code useful, please consider citing us and give us a star! 
 
 ```
-@misc{su2024can,
-  title={Can We Get Rid of Handcrafted Feature Extractors? SparseViT: Nonsemantics-Centered, Parameter-Efficient Image Manipulation Localization Through Spare-Coding Transformer},
+@inproceedings{su2025can,
+  title={Can we get rid of handcrafted feature extractors? sparsevit: Nonsemantics-centered, parameter-efficient image manipulation localization through spare-coding transformer},
   author={Su, Lei and Ma, Xiaochen and Zhu, Xuekang and Niu, Chaoqun and Lei, Zeyu and Zhou, Ji-Zhe},
-  year={2024},
-  eprint={2412.14598},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={7},
+  pages={7024--7032},
+  year={2025}
 }
 ```
+
+## Star History
+<a href="https://star-history.com/#scu-zjz/SparseViT&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=scu-zjz/SparseViT&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=scu-zjz/SparseViT&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=scu-zjz/SparseViT&type=Date" />
+ </picture>
+</a>
