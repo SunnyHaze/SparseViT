@@ -2,18 +2,28 @@ import json
 import os
 import random
 from PIL import Image
-import cv2
 
+# Augmentation library
 import albumentations as albu
 from torchvision import datasets, transforms
 from torch.utils.data import Dataset, DataLoader
 import torch
 import numpy as np
-from sparsevit_transforms import get_albu_transforms
+
+from .sparsevit_transforms import get_albu_transforms
 
 
 
 def pil_loader(path: str) -> Image.Image:
+    """PIL image loader
+
+    Args:
+        path (str): image path
+
+    Returns:
+        Image.Image: PIL image (after np.array(x) becomes [0,255] int8)
+    """
+    # open path as file to avoid ResourceWarning (https://github.com/python-pillow/Pillow/issues/835)
     with open(path, 'rb') as f:
         img = Image.open(f)
         return img.convert('RGB')
@@ -32,14 +42,16 @@ class base_dataset(Dataset):
         gt_path = None # Ground truth
         return tp_path, gt_path
         
-    def __init__(self, path, output_size = 512 ,transform = None, if_return_shape=None) -> None:
+    def __init__(self, path, output_size = 512 ,transform = None, edge_width = None, if_return_name = False, if_return_shape = False, if_return_type = False) -> None:
         super().__init__()
         self.tp_path, self.gt_path = self._init_dataset_path(path)
         if self.tp_path == None:
             raise NotImplementedError
         self.transform = transform
+        self.resize_transform =  get_albu_transforms(type_='resize', outputsize=output_size)
+        self.if_return_name = if_return_name
         self.if_return_shape = if_return_shape
-        self.padding_transform =  get_albu_transforms(type_='resize', outputsize=output_size)
+        self.if_return_type = if_return_type
     def __getitem__(self, index):
         output_list = []
         tp_path = self.tp_path[index]
@@ -71,19 +83,26 @@ class base_dataset(Dataset):
         gt_img =  (np.mean(gt_img, axis = 2, keepdims = True)  > 127.5 ) * 1.0 # fuse the 3 channels to 1 channel, and make it binary(0 or 1)
         gt_img =  gt_img.transpose(2,0,1)[0] # H W C -> C H W -> H W
         masks_list = [gt_img]
-        # Do padings
-        
-        res_dict = self.padding_transform(image = tp_img, masks = masks_list)
+        # Do resize
+        res_dict = self.resize_transform(image = tp_img, masks = masks_list)
         
         tp_img = res_dict['image']
         gt_img = res_dict['masks'][0].unsqueeze(0) # H W -> 1 H W        
         output_list.append(tp_img)
         output_list.append(gt_img)
         
+        if self.if_return_name:
+            basenae = os.path.basename(tp_path)
+            output_list.append(basenae)
+        
         if self.if_return_shape:
             tp_shape = (tp_shape[1], tp_shape[0]) # swap for correct order
             tp_shape = torch.tensor(tp_shape)
             output_list.append(tp_shape)
+            
+        if self.if_return_type:
+            gt_type = True if torch.max(gt_img) != 0 else False
+            output_list.append(gt_type)
     
         return output_list
     def __len__(self):
@@ -104,6 +123,21 @@ class mani_dataset(base_dataset):
         return t_tp_list, t_gt_list
     
 class json_dataset(base_dataset):
+    """ init from a json file, which contains all the images path
+        file is organized as:
+            [["./Tp/6.jpg", "./Gt/6.jpg"],
+                ["./Tp/7.jpg", "./Gt/7.jpg"],
+                ["./Tp/8.jpg", "Negative"],
+                ......
+            ]
+        if path is "Neagative" then the image is negative sample, which means ground truths is a totally black image.
+        
+    Args:
+        path (_type_): _description_
+        transform_albu (_type_, optional): _description_. Defaults to None.
+        mask_edge_generator (_type_, optional): _description_. Defaults to None.
+        if_return_shape
+    """
     def _init_dataset_path(self, path):
         images = json.load(open(path, 'r'))
         tp_list = []
@@ -114,14 +148,17 @@ class json_dataset(base_dataset):
         return tp_list, gt_list
 
 
+
 class balanced_dataset(Dataset):
     """平衡多个数据集的采样，确保每个数据集都能被均匀采样"""
     
     def __init__(self, 
                  path=None, 
                  sample_number=1840,
-                 *args, 
-                 **kwargs):
+                 output_size = 512 ,
+                 transform = None, 
+                 if_return_shape = False,
+                 ):
         self.sample_number = sample_number
         if path is None:
             # 默认数据集配置
@@ -144,14 +181,14 @@ class balanced_dataset(Dataset):
                 self.settings_list.append([dataset_path, dataset_str])
         
         # 初始化各个数据集
-        self.dataset_list = [self._get_dataset(path, dataset_str, *args, **kwargs) 
+        self.dataset_list = [self._get_dataset(path, dataset_str, output_size=output_size, transform=transform, if_return_shape=if_return_shape) 
                             for path, dataset_str in self.settings_list]
         
-    def _get_dataset(self, path, dataset_type, *args, **kwargs):
+    def _get_dataset(self, path, dataset_type, output_size = 512 ,transform = None, if_return_shape = False):
         if dataset_type == 'mani_dataset':
-            return mani_dataset(path, *args, **kwargs)
+            return mani_dataset(path, output_size=output_size, transform=transform, if_return_shape=if_return_shape)
         elif dataset_type == 'json_dataset':
-            return json_dataset(path, *args, **kwargs)
+            return json_dataset(path, output_size=output_size, transform=transform, if_return_shape=if_return_shape)
         
     def __len__(self):
         return self.sample_number * len(self.settings_list)
@@ -162,3 +199,4 @@ class balanced_dataset(Dataset):
         length = len(selected_dataset)
         selected_item = random.randint(0, length - 1)
         return selected_dataset[selected_item]
+

@@ -17,6 +17,7 @@ class SparseViT_Mul(nn.Module):
                  mlp_ratio=4,
                  qkv_bias=True,
                  norm_layer=partial(nn.LayerNorm, eps=1e-6),
+                 pretrained_path='/mnt/data0/sulei/workspace/IMDLBenCo-dilation/IMDLBenCo/model_zoo/uniformer/pre_train/uniformer_base_ls_in1k.pth',
     ):
         super(SparseViT_Mul, self).__init__()
         self.img_size = img_size
@@ -30,9 +31,11 @@ class SparseViT_Mul(nn.Module):
             drop_path_rate=0.2,
             mlp_ratio=mlp_ratio,
             qkv_bias=qkv_bias,
-            norm_layer=norm_layer
+            norm_layer=norm_layer,
+            pretrained_path=pretrained_path,
         )
         self.lmu = Multiple(embed_dim=512)
+        self.BCE_loss = nn.BCEWithLogitsLoss()
         self.apply(self._init_weights)
         
     def _init_weights(self, m):
@@ -44,7 +47,7 @@ class SparseViT_Mul(nn.Module):
             nn.init.constant_(m.bias, 0)
             nn.init.constant_(m.weight, 1.0)
     
-    def forward(self, image, *args, **kwargs):
+    def forward(self, image, mask, *args, **kwargs):
         image = self.encoder_net(image)
         feature_list = []
         for k, v in image.items():
@@ -52,6 +55,6 @@ class SparseViT_Mul(nn.Module):
             
         image = self.lmu(feature_list)
         image = F.interpolate(image, size = (self.img_size, self.img_size), mode='bilinear', align_corners=False)
+        predict_loss = self.BCE_loss(image, mask)
         image = torch.sigmoid(image)
-        return image  
-    
+        return predict_loss, image
