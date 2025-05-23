@@ -32,13 +32,13 @@ import SparseViT_Mul
 from engine_train import train_one_epoch, test_one_epoch
 
 def get_args_parser():
-    parser = argparse.ArgumentParser('IML-ViT training', add_help=True)
+    parser = argparse.ArgumentParser('SparseViT training', add_help=True)
     parser.add_argument('--batch_size', default=1, type=int,
                         help='Batch size per GPU (effective batch size is batch_size * accum_iter * # gpus')
     parser.add_argument('--test_batch_size', default=2, type=int,
                         help="batch size for testing")
     #
-    parser.add_argument('--pretrain_path', default = '', type=str, help='path to uniformar pretrain model')
+    parser.add_argument('--pretrain_path', default = '', type=str, help='path to uniformer pretrain model')
     
     parser.add_argument('--epochs', default=200, type=int)
     parser.add_argument('--test_period', default=4, type=int,
@@ -115,11 +115,7 @@ def main(args):
         sample_number = 1840,
         transform = train_transform,
     )
-    # if os.path.isdir(args.data_path):
-    #     dataset_train = utils.datasets.mani_dataset(args.data_path, transform=train_transform, edge_width=args.edge_broaden, if_return_shape=True)
-    # else:
-    #     dataset_train = utils.datasets.json_dataset(args.data_path,transform=train_transform, edge_width = args.edge_broaden, if_return_shape = True)
-    
+
     if os.path.isdir(args.test_data_path):
         dataset_test = utils.datasets.mani_dataset(args.test_data_path, transform=test_transform)
     else:
