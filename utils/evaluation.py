@@ -6,16 +6,7 @@ from sklearn.metrics import roc_auc_score,roc_curve
 import numpy as np
 import utils.datasets
 from torch.utils.data import DataLoader
-def genertate_region_mask(masks ,batch_shape):
-    """generate B 1 H W meaningful-region-mask for a batch of masks
 
-    Args:
-        batch_shape (_type_): _description_
-    """
-    meaningful_mask = torch.zeros_like(masks)
-    for idx, shape in enumerate(batch_shape):
-        meaningful_mask[idx, :, :shape[0], :shape[1]] = 1
-    return meaningful_mask
 
 def cal_confusion_matrix(predict, target, threshold=0.5):
     """compute local confusion matrix for a batch of predict and target masks
