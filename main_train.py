@@ -161,13 +161,7 @@ def main(args):
         drop_last=False,
     )
     
-    # define the model
-    # model = iml_vit_model.iml_vit_model(
-    #     vit_pretrain_path = args.vit_pretrain_path,
-    #     predict_head_norm= args.predict_head_norm,
-    #     edge_lambda = args.edge_lambda
-    # )
-    model = SparseViT_Mul.SparseViT_Mul()
+    model = SparseViT_Mul.SparseViT_Mul(pretrained_path=args.pretrain_path)
     if args.distributed:
         model = torch.nn.SyncBatchNorm.convert_sync_batchnorm(model)
 
