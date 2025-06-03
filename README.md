@@ -101,7 +101,7 @@ pip install -r requirements.txt
   <summary>2) Download the Uniformer pretrained weights</summary>
   <br>
   
-  - Download the pretrained weights from [Google Drive](https://drive.google.com/drive/folders/1v-8I1WCbR0hpaV434yPgsFiimu6wWLCW?usp=drive_link) and place them in the checkpoint/train/pretrain directory.
+  - Download the pretrained weights from [Google Drive](https://drive.google.com/file/d/1XPjAXhDS6nGNXb11VzgdNqEeM7X0p2t9/view?usp=drive_link) and place them in the checkpoint/train/pretrain directory.
   - Modify the pretrain_path in the train.sh file to the location of your Uniformer pre-trained model.
     
 </details>
