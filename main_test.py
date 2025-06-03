@@ -37,7 +37,7 @@ with torch.no_grad():
         img = img.unsqueeze(0) # CHW -> 1CHW
         gt = gt.unsqueeze(0)
         # inference
-        mask_pred = model(img, gt)
+        _, mask_pred = model(img, gt)
         output = mask_pred
         output = output[0].permute(1, 2, 0).cpu().numpy()
         if output.shape[-1] == 1:
