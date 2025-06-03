@@ -14,7 +14,7 @@ dataset = mani_dataset(
     if_return_shape=True
 )
 print(dataset)
-print(f":ength of this dataset: {len(dataset)}")
+print(f":length of this dataset: {len(dataset)}")
 # Check if GPU is available
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
