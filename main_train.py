@@ -111,7 +111,7 @@ def main(args):
 
     # ---- dataset with crop augmentation ----
     dataset_train = utils.datasets.balanced_dataset(
-        # path = args.data_path,
+        path = args.data_path,
         sample_number = 1840,
         transform = train_transform,
     )
