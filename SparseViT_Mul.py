@@ -17,7 +17,7 @@ class SparseViT_Mul(nn.Module):
                  mlp_ratio=4,
                  qkv_bias=True,
                  norm_layer=partial(nn.LayerNorm, eps=1e-6),
-                 pretrained_path='/mnt/data0/sulei/workspace/IMDLBenCo-dilation/IMDLBenCo/model_zoo/uniformer/pre_train/uniformer_base_ls_in1k.pth',
+                 pretrained_path=None,
     ):
         super(SparseViT_Mul, self).__init__()
         self.img_size = img_size
