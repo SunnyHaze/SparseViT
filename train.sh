@@ -5,13 +5,13 @@ torchrun \
 main_train.py \
     --world_size 1 \
     --batch_size 16 \
-    --data_path "The location of your combined dataset configuration file" \
+    --data_path "<The location of your combined dataset configuration file>" \
     --epochs 200 \
     --lr 2e-4 \
     --min_lr 5e-7 \
     --weight_decay 0.05 \
-    --pretrain_path "/uniformer_base_ls_in1k.pth" \
-    --test_data_path "/CASIA1.0" \
+    --pretrain_path "<path to uniformer_base_ls_in1k.pth>" \
+    --test_data_path "<path to /CASIA1.0>" \
     --warmup_epochs 4 \
     --output_dir ./output_dir/ \
     --log_dir ./output_dir/  \

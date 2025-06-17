@@ -163,13 +163,13 @@ class balanced_dataset(Dataset):
         if path is None:
             # 默认数据集配置
             self.settings_list = [
-                ['/mnt/data0/public_datasets/IML/CASIA2.0', "mani_dataset"],
-                ['/mnt/data0/public_datasets/IML/FantasticReality_v1/FantasticReality.json', "json_dataset"],
-                ['/mnt/data0/public_datasets/IML/IMD_20_1024', "mani_dataset"],
-                ['/mnt/data0/public_datasets/IML/tampCOCO/sp_COCO_list.json', "json_dataset"],
-                ['/mnt/data0/public_datasets/IML/tampCOCO/cm_COCO_list.json', "json_dataset"],
-                ['/mnt/data0/public_datasets/IML/tampCOCO/bcm_COCO_list.json', "json_dataset"],
-                ['/mnt/data0/public_datasets/IML/tampCOCO/bcmc_COCO_list.json', "json_dataset"]
+                ["ManiDataset", "/mnt/data0/public_datasets/IML/CASIA2.0"],
+                ["JsonDataset", "/mnt/data0/public_datasets/IML/FantasticReality_v1/FantasticReality.json"],
+                ["ManiDataset", "/mnt/data0/public_datasets/IML/IMD_20_1024"],
+                ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/sp_COCO_list.json"],
+                ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/cm_COCO_list.json"],
+                ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/bcm_COCO_list.json"],
+                ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/bcmc_COCO_list.json"]
             ]
         else:
             import json
@@ -178,18 +178,20 @@ class balanced_dataset(Dataset):
             self.settings_list = []
             for dataset_str, dataset_path in setting_json:
                 # dataset_class = globals()[dataset_str]  # 通过类名获取对应的类
+
                 self.settings_list.append([dataset_path, dataset_str])
         
         # 初始化各个数据集
         self.dataset_list = [self._get_dataset(path, dataset_str, output_size=output_size, transform=transform, if_return_shape=if_return_shape) 
                             for path, dataset_str in self.settings_list]
-        
-    def _get_dataset(self, path, dataset_type, output_size = 512 ,transform = None, if_return_shape = False):
-        if dataset_type == 'mani_dataset':
+
+    def _get_dataset(self, path, dataset_type, output_size=512, transform=None, if_return_shape=False):
+        if dataset_type == 'ManiDataset':
             return mani_dataset(path, output_size=output_size, transform=transform, if_return_shape=if_return_shape)
-        elif dataset_type == 'json_dataset':
+        elif dataset_type == 'JsonDataset':
             return json_dataset(path, output_size=output_size, transform=transform, if_return_shape=if_return_shape)
-        
+        else:
+            raise ValueError(f"Unsupported dataset type: {dataset_type}. Supported types are 'ManiDataset' and 'JsonDataset'.")
     def __len__(self):
         return self.sample_number * len(self.settings_list)
     

@@ -54,13 +54,13 @@ Note: "Negative" indicates a real image with no ground truth.
 
 ```json
 [
-    ["/mnt/data0/public_datasets/IML/CASIA2.0", "mani_dataset"],
-    ["/mnt/data0/public_datasets/IML/FantasticReality_v1/FantasticReality.json", "json_dataset"],
-    ["/mnt/data0/public_datasets/IML/IMD_20_1024", "mani_dataset"],
-    ["/mnt/data0/public_datasets/IML/tampCOCO/sp_COCO_list.json", "json_dataset"],
-    ["/mnt/data0/public_datasets/IML/tampCOCO/cm_COCO_list.json", "json_dataset"],
-    ["/mnt/data0/public_datasets/IML/tampCOCO/bcm_COCO_list.json", "json_dataset"],
-    ["/mnt/data0/public_datasets/IML/tampCOCO/bcmc_COCO_list.json", "json_dataset"]
+    ["ManiDataset", "/mnt/data0/public_datasets/IML/CASIA2.0"],
+    ["JsonDataset", "/mnt/data0/public_datasets/IML/FantasticReality_v1/FantasticReality.json"],
+    ["ManiDataset", "/mnt/data0/public_datasets/IML/IMD_20_1024"],
+    ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/sp_COCO_list.json"],
+    ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/cm_COCO_list.json"],
+    ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/bcm_COCO_list.json"],
+    ["JsonDataset", "/mnt/data0/public_datasets/IML/tampCOCO/bcmc_COCO_list.json"]
 ]
 ```
   Configure the path to the organized JSON file in the data_path parameter within the train.sh file.
